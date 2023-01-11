@@ -12,11 +12,10 @@ public class AddressDTO {
     
     private String uuid;
     private String cep;
+    private String city;
     private String street;
-    private String complement;
-    private String neighborhood;
     private String uf;
-    private Integer numer;
+    private Integer number;
 
     public AddressDTO(){}
     
@@ -24,11 +23,10 @@ public class AddressDTO {
 		
         this.uuid = address.getUuid();
         this.cep = address.getCep();
+        this.city = address.getCity();
         this.street = address.getStreet();
-        this.complement = address.getComplement();
-        this.neighborhood = address.getNeighborhood();
         this.uf = address.getUf();
-        this.numer = address.getNumer();
+        this.number = address.getNumber();
 
     }
 
@@ -39,11 +37,10 @@ public class AddressDTO {
     public static AddressModel convertDTO(AddressDTO dto){
         AddressModel model = new AddressModel();
         model.setCep(dto.getCep());
+        model.setCity(dto.getCity());
         model.setStreet(dto.getStreet());
-        model.setComplement(dto.getComplement());
-        model.setNeighborhood(dto.getNeighborhood());
         model.setUf(dto.getUf());
-        model.setNumer(dto.getNumer());
+        model.setNumber(dto.getNumber());
 
         return model;
     }

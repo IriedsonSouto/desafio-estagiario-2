@@ -10,7 +10,7 @@ public interface AddressRepository extends JpaRepository<AddressModel, String> {
 
     public AddressModel findByUuid(String uuid);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM address WHERE cep=:cep AND numer=:numer")
-	public AddressModel findByCepAndNumer(String cep, Integer numer);
+    @Query(nativeQuery = true, value = "SELECT * FROM address WHERE cep=:cep AND number=:number")
+	public AddressModel findByCepAndNumber(String cep, Integer number);
     
 }

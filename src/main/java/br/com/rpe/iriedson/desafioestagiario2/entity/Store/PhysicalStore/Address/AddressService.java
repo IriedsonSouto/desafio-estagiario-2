@@ -31,8 +31,8 @@ public class AddressService extends ServiceTemplate {
         return (AddressModel) super.readByUuid(uuid, this.addressRepository);
     }
 
-    public AddressModel readByCepAndNumer(String cep, Integer numer) throws Exception {
-        return (AddressModel) addressRepository.findByCepAndNumer(cep, numer);
+    public AddressModel readByCepAndNumber(String cep, Integer number) throws Exception {
+        return (AddressModel) addressRepository.findByCepAndNumber(cep, number);
     }
 
     public List<AddressModel> readAll(){
@@ -44,18 +44,16 @@ public class AddressService extends ServiceTemplate {
             AddressModel updateAddress = addressRepository.findByUuid(uuid);
 
             String cep = addressDTO.getCep() == null ? updateAddress.getCep() : addressDTO.getCep();
+            String city = addressDTO.getCity() == null ? updateAddress.getCity() : addressDTO.getCity();
             String street = addressDTO.getStreet() == null ? updateAddress.getStreet() : addressDTO.getStreet();
-            String complement = addressDTO.getComplement() == null ? updateAddress.getComplement() : addressDTO.getComplement();
-            String neighborhood = addressDTO.getNeighborhood() == null ? updateAddress.getNeighborhood() : addressDTO.getNeighborhood();
             String uf = addressDTO.getUf() == null ? updateAddress.getUf() : addressDTO.getUf();
-            Integer numer = addressDTO.getNumer() == null ? updateAddress.getNumer() : addressDTO.getNumer();
+            Integer number = addressDTO.getNumber() == null ? updateAddress.getNumber() : addressDTO.getNumber();
 
             updateAddress.setCep(cep);
+            updateAddress.setCity(city);
             updateAddress.setStreet(street);
-            updateAddress.setComplement(complement);
-            updateAddress.setNeighborhood(neighborhood);
             updateAddress.setUf(uf);
-            updateAddress.setNumer(numer);
+            updateAddress.setNumber(number);
 
 
             boolean update = super.update(updateAddress, this.addressRepository);

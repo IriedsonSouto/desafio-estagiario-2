@@ -26,16 +26,14 @@ public class AddressModel implements Serializable {
     @Column(length=9, nullable=false)
     private String cep;
     @Column(nullable=false)
-    private String street;
+    private String city ;
     @Column(nullable=false)
-    private String complement;
-    @Column(nullable=false)
-    private String neighborhood;
+    private String street ;
     @Column(length=2, nullable=false)
     private String uf;
     @Column(nullable=false)
-    private Integer numer;
-       
+    private Integer number;
+
 
     public AddressModel() {
 		this.uuid= Generators.randomBasedGenerator().generate().toString();

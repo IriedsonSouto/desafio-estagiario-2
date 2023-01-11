@@ -52,7 +52,7 @@ public class PhysicalStoreService extends ServiceTemplate {
     }
 
     public PhysicalStoreModel readByCepAndNumer(String cep, Integer numer) throws Exception {
-        AddressModel address = addressService.readByCepAndNumer(cep, numer); 
+        AddressModel address = addressService.readByCepAndNumber(cep, numer); 
         return (PhysicalStoreModel) physicalStoreRepository.findByAddress(address);
     }
 

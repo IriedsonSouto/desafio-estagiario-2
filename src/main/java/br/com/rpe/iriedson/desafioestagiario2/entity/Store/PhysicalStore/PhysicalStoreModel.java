@@ -15,11 +15,11 @@ import java.io.Serializable;
 @Entity(name = "physical_store")
 public class PhysicalStoreModel extends StoreModel implements Serializable {
     
+    @Column(nullable=false)
+    private Integer numEmployees;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address", nullable = false)
     private AddressModel address;
-    @Column(nullable=false)
-    private Integer numEmployees;
     
 
     public PhysicalStoreModel() {
