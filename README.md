@@ -5,6 +5,7 @@
 
 ## :books: Sobre o Sistema:
 O sistema visa manter um cadastro das lojas de clientes para futuras consultas. As lojas podem ser físicas e virtuais com informações diferentes entre elas, assim facilitando consultas ao precisar de um contato de telefone ou endereço.
+
 *No projeto, foi utilizado o padrão MVC junto com a ideologia DDD para organizar os pacotes, deste modo as pastas são separadas conforme entidades e regras de negocio, ficando mais fácil observar toda a rota que envolva uma funcionalidade, ajudando na manutenção da aplicação, também adotei o Clear Code, para minimizar comentários ao utilizar nomenclaturas limpas, diretas e autoexplicativas.*
 
 Ao rodar a aplicação você pode acessar a documentação clicando [aqui](http://localhost:8080/swagger-ui/index.html#/).<br>
