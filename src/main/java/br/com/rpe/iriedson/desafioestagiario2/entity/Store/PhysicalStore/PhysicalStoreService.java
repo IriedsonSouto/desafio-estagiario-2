@@ -2,6 +2,8 @@ package br.com.rpe.iriedson.desafioestagiario2.entity.Store.PhysicalStore;
 
 import br.com.rpe.iriedson.desafioestagiario2.entity.Store.PhysicalStore.Address.AddressDTO;
 import br.com.rpe.iriedson.desafioestagiario2.entity.Store.PhysicalStore.Address.AddressModel;
+import br.com.rpe.iriedson.desafioestagiario2.entity.Store.PhysicalStore.Address.AddressService;
+import br.com.rpe.iriedson.desafioestagiario2.service.ValidationService;
 import br.com.rpe.iriedson.desafioestagiario2.template.ServiceTemplate;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,17 @@ public class PhysicalStoreService extends ServiceTemplate {
     
     @Autowired
     private PhysicalStoreRepository physicalStoreRepository;
+    @Autowired
+    private AddressService addressService;
+    @Autowired
+    private ValidationService validationService;
     
     public PhysicalStoreModel create(PhysicalStoreDTO physicalStoreDTO) throws Exception {
         try{
+            validationService.validationCnpjFormat(physicalStoreDTO.getCnpj());
+            validationService.validationPhoneFormat(physicalStoreDTO.getPhone());
+            validationService.validationCepFormat(physicalStoreDTO.getAddress().getCep());
+
             PhysicalStoreModel physicalStore = PhysicalStoreDTO.convertDTO(physicalStoreDTO);
             boolean create = super.create(physicalStore, this.physicalStoreRepository);
             if(create){
@@ -41,7 +51,8 @@ public class PhysicalStoreService extends ServiceTemplate {
         return (PhysicalStoreModel) physicalStoreRepository.findByPhone(phone);
     }
 
-    public PhysicalStoreModel readByUrl(AddressModel address) throws Exception {
+    public PhysicalStoreModel readByCepAndNumer(String cep, Integer numer) throws Exception {
+        AddressModel address = addressService.readByCepAndNumer(cep, numer); 
         return (PhysicalStoreModel) physicalStoreRepository.findByAddress(address);
     }
 
@@ -59,6 +70,10 @@ public class PhysicalStoreService extends ServiceTemplate {
             String phone = physicalStoreDTO.getPhone() == null ? updatephysicalStore.getPhone() : physicalStoreDTO.getPhone();
             AddressModel address = physicalStoreDTO.getAddress() == null ? updatephysicalStore.getAddress() : AddressDTO.convertDTO(physicalStoreDTO.getAddress());
             Integer numEmployees = physicalStoreDTO.getNumEmployees() == null ? updatephysicalStore.getNumEmployees() : physicalStoreDTO.getNumEmployees();
+
+            validationService.validationCnpjFormat(cnpj);
+            validationService.validationPhoneFormat(phone);
+            validationService.validationCepFormat(address.getCep());
 
             updatephysicalStore.setCnpj(cnpj);
             updatephysicalStore.setName(name);

@@ -18,6 +18,8 @@ public class VirtualStoreDTO {
     private String url;
     private Integer rating;
 
+    public VirtualStoreDTO(){}
+
 	public VirtualStoreDTO(VirtualStoreModel virtualStore) {    
 		
         this.uuid = virtualStore.getUuid();

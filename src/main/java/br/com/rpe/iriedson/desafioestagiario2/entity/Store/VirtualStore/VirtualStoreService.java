@@ -1,5 +1,6 @@
 package br.com.rpe.iriedson.desafioestagiario2.entity.Store.VirtualStore;
 
+import br.com.rpe.iriedson.desafioestagiario2.service.ValidationService;
 import br.com.rpe.iriedson.desafioestagiario2.template.ServiceTemplate;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,14 @@ public class VirtualStoreService extends ServiceTemplate {
     
     @Autowired
     private VirtualStoreRepository virtualStoreRepository;
+    @Autowired
+    private ValidationService validationService;
     
     public VirtualStoreModel create(VirtualStoreDTO virtualStoreDTO) throws Exception {
         try{
+            validationService.validationCnpjFormat(virtualStoreDTO.getCnpj());
+            validationService.validationPhoneFormat(virtualStoreDTO.getPhone());
+
             VirtualStoreModel virtualStore = VirtualStoreDTO.convertDTO(virtualStoreDTO);
             boolean create = super.create(virtualStore, this.virtualStoreRepository);
             if(create){
@@ -48,7 +54,7 @@ public class VirtualStoreService extends ServiceTemplate {
     }
 
     public VirtualStoreModel update(VirtualStoreDTO virtualStoreDTO, String uuid) throws Exception {
-        try{
+        try{  
             VirtualStoreModel updateVirtualStore = (VirtualStoreModel) virtualStoreRepository.findByUuid(uuid);
 
             String cnpj = virtualStoreDTO.getCnpj() == null ? updateVirtualStore.getCnpj() : virtualStoreDTO.getCnpj();
@@ -57,6 +63,9 @@ public class VirtualStoreService extends ServiceTemplate {
             String phone = virtualStoreDTO.getPhone() == null ? updateVirtualStore.getPhone() : virtualStoreDTO.getPhone();
             String url = virtualStoreDTO.getUrl() == null ? updateVirtualStore.getUrl() : virtualStoreDTO.getUrl();
             Integer rating = virtualStoreDTO.getRating() == null ? updateVirtualStore.getRating() : virtualStoreDTO.getRating();
+
+            validationService.validationCnpjFormat(cnpj);
+            validationService.validationPhoneFormat(phone);
 
             updateVirtualStore.setCnpj(cnpj);
             updateVirtualStore.setName(name);

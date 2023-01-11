@@ -18,6 +18,8 @@ public class AddressDTO {
     private String uf;
     private Integer numer;
 
+    public AddressDTO(){}
+    
     public AddressDTO(AddressModel address) {    
 		
         this.uuid = address.getUuid();

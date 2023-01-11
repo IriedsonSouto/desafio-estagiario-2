@@ -46,6 +46,37 @@ public class PhysicalStoreController {
         }
     }
 
+    @GetMapping("/get-by-cnpj/{cnpj}")
+    public ResponseEntity<PhysicalStoreDTO> findByCnpj(@PathVariable("cnpj") String cnpj) {
+        try{
+            PhysicalStoreModel result = this.physicalStoreService.readByCnpj(cnpj);
+            return ResponseEntity.status(200).body(new PhysicalStoreDTO(result));
+        }catch (Exception e) {
+            return ResponseEntity.status(404).body(null);
+        }
+    }
+
+    @GetMapping("/get-by-phone/{phone}")
+    public ResponseEntity<PhysicalStoreDTO> findByPhone(@PathVariable("phone") String phone) {
+        try{
+            PhysicalStoreModel result = this.physicalStoreService.readByPhone(phone);
+            return ResponseEntity.status(200).body(new PhysicalStoreDTO(result));
+        }catch (Exception e) {
+            return ResponseEntity.status(404).body(null);
+        }
+    }
+
+    @GetMapping("/get-by-address/{cep}-{numer}")
+    public ResponseEntity<PhysicalStoreDTO> findByCepAndNumer(@PathVariable("cep") String cep,
+                                                            @PathVariable("numer") Integer numer) {
+        try{
+            PhysicalStoreModel result = this.physicalStoreService.readByCepAndNumer(cep, numer);
+            return ResponseEntity.status(200).body(new PhysicalStoreDTO(result));
+        }catch (Exception e) {
+            return ResponseEntity.status(404).body(null);
+        }
+    }
+
     @PutMapping("/{uuid}")
     public ResponseEntity update(@RequestBody PhysicalStoreDTO physicalStoreDTO, @PathVariable("uuid") String uuid) {
         try{

@@ -21,6 +21,8 @@ public class PhysicalStoreDTO {
     private AddressDTO address;
     private Integer numEmployees;
 
+    public PhysicalStoreDTO(){}
+    
 	public PhysicalStoreDTO(PhysicalStoreModel physicalStore) {    
 		
         this.uuid = physicalStore.getUuid();
