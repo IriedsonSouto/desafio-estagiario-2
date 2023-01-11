@@ -1,4 +1,4 @@
-package br.com.rpe.iriedson.desafioestagiario2.entity.VirtualStore;
+package br.com.rpe.iriedson.desafioestagiario2.entity.Store.VirtualStore;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +40,36 @@ public class VirtualStoreController {
     public ResponseEntity<VirtualStoreDTO> find(@PathVariable("uuid") String uuid) {
         try{
             VirtualStoreModel result = this.virtualStoreService.readByUuid(uuid);
+            return ResponseEntity.status(200).body(new VirtualStoreDTO(result));
+        }catch (Exception e) {
+            return ResponseEntity.status(404).body(null);
+        }
+    }
+
+    @GetMapping("/get-by-cnpj/{cnpj}")
+    public ResponseEntity<VirtualStoreDTO> findByCnpj(@PathVariable("cnpj") String cnpj) {
+        try{
+            VirtualStoreModel result = this.virtualStoreService.readByCnpj(cnpj);
+            return ResponseEntity.status(200).body(new VirtualStoreDTO(result));
+        }catch (Exception e) {
+            return ResponseEntity.status(404).body(null);
+        }
+    }
+
+    @GetMapping("/get-by-phone/{phone}")
+    public ResponseEntity<VirtualStoreDTO> findByPhone(@PathVariable("phone") String phone) {
+        try{
+            VirtualStoreModel result = this.virtualStoreService.readByPhone(phone);
+            return ResponseEntity.status(200).body(new VirtualStoreDTO(result));
+        }catch (Exception e) {
+            return ResponseEntity.status(404).body(null);
+        }
+    }
+
+    @GetMapping("/get-by-url/{url}")
+    public ResponseEntity<VirtualStoreDTO> findByUrl(@PathVariable("url") String url) {
+        try{
+            VirtualStoreModel result = this.virtualStoreService.readByUrl(url);
             return ResponseEntity.status(200).body(new VirtualStoreDTO(result));
         }catch (Exception e) {
             return ResponseEntity.status(404).body(null);

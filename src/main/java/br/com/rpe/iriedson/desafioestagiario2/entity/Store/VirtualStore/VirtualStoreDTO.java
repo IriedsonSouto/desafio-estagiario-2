@@ -1,4 +1,4 @@
-package br.com.rpe.iriedson.desafioestagiario2.entity.VirtualStore;
+package br.com.rpe.iriedson.desafioestagiario2.entity.Store.VirtualStore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -33,4 +33,15 @@ public class VirtualStoreDTO {
         return virtualStore.stream().map(VirtualStoreDTO::new).collect(Collectors.toList());
     }
 
+    public static VirtualStoreModel convertDTO(VirtualStoreDTO dto){
+        VirtualStoreModel model = new VirtualStoreModel();
+        model.setCnpj(dto.getCnpj());
+        model.setName(dto.getName());
+        model.setSegment(dto.getSegment());
+        model.setPhone(dto.getPhone());
+        model.setUrl(dto.getUrl());
+        model.setRating(dto.getRating());
+
+        return model;
+    }
 }

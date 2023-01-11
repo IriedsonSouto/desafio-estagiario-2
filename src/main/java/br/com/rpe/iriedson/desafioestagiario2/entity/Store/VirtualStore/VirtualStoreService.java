@@ -1,4 +1,4 @@
-package br.com.rpe.iriedson.desafioestagiario2.entity.VirtualStore;
+package br.com.rpe.iriedson.desafioestagiario2.entity.Store.VirtualStore;
 
 import br.com.rpe.iriedson.desafioestagiario2.template.ServiceTemplate;
 
@@ -16,7 +16,7 @@ public class VirtualStoreService extends ServiceTemplate {
     
     public VirtualStoreModel create(VirtualStoreDTO virtualStoreDTO) throws Exception {
         try{
-            VirtualStoreModel virtualStore = null;
+            VirtualStoreModel virtualStore = VirtualStoreDTO.convertDTO(virtualStoreDTO);
             boolean create = super.create(virtualStore, this.virtualStoreRepository);
             if(create){
                 return virtualStore;
@@ -31,13 +31,25 @@ public class VirtualStoreService extends ServiceTemplate {
         return (VirtualStoreModel) super.readByUuid(uuid, this.virtualStoreRepository);
     }
 
+    public VirtualStoreModel readByCnpj(String cnpj) throws Exception {
+        return (VirtualStoreModel) virtualStoreRepository.findByCnpj(cnpj);
+    }
+
+    public VirtualStoreModel readByPhone(String phone) throws Exception {
+        return (VirtualStoreModel) virtualStoreRepository.findByPhone(phone);
+    }
+
+    public VirtualStoreModel readByUrl(String url) throws Exception {
+        return (VirtualStoreModel) virtualStoreRepository.findByUrl(url);
+    }
+
     public List<VirtualStoreModel> readAll(){
         return (List<VirtualStoreModel>) super.readAll(this.virtualStoreRepository);
     }
 
     public VirtualStoreModel update(VirtualStoreDTO virtualStoreDTO, String uuid) throws Exception {
         try{
-            VirtualStoreModel updateVirtualStore = virtualStoreRepository.findByUuid(uuid);
+            VirtualStoreModel updateVirtualStore = (VirtualStoreModel) virtualStoreRepository.findByUuid(uuid);
 
             String cnpj = virtualStoreDTO.getCnpj() == null ? updateVirtualStore.getCnpj() : virtualStoreDTO.getCnpj();
             String name = virtualStoreDTO.getName() == null ? updateVirtualStore.getName() : virtualStoreDTO.getName();

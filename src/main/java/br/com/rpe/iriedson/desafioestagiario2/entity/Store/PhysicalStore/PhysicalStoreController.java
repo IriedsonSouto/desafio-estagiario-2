@@ -1,4 +1,4 @@
-package br.com.rpe.iriedson.desafioestagiario2.entity.PhysicalStore;
+package br.com.rpe.iriedson.desafioestagiario2.entity.Store.PhysicalStore;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

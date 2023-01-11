@@ -1,5 +1,7 @@
-package br.com.rpe.iriedson.desafioestagiario2.entity.PhysicalStore;
+package br.com.rpe.iriedson.desafioestagiario2.entity.Store.PhysicalStore;
 
+import br.com.rpe.iriedson.desafioestagiario2.entity.Store.PhysicalStore.Address.AddressDTO;
+import br.com.rpe.iriedson.desafioestagiario2.entity.Store.PhysicalStore.Address.AddressModel;
 import br.com.rpe.iriedson.desafioestagiario2.template.ServiceTemplate;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,7 @@ public class PhysicalStoreService extends ServiceTemplate {
     
     public PhysicalStoreModel create(PhysicalStoreDTO physicalStoreDTO) throws Exception {
         try{
-            PhysicalStoreModel physicalStore = null;
+            PhysicalStoreModel physicalStore = PhysicalStoreDTO.convertDTO(physicalStoreDTO);
             boolean create = super.create(physicalStore, this.physicalStoreRepository);
             if(create){
                 return physicalStore;
@@ -31,6 +33,18 @@ public class PhysicalStoreService extends ServiceTemplate {
         return (PhysicalStoreModel) super.readByUuid(uuid, this.physicalStoreRepository);
     }
 
+    public PhysicalStoreModel readByCnpj(String cnpj) throws Exception {
+        return (PhysicalStoreModel) physicalStoreRepository.findByCnpj(cnpj);
+    }
+
+    public PhysicalStoreModel readByPhone(String phone) throws Exception {
+        return (PhysicalStoreModel) physicalStoreRepository.findByPhone(phone);
+    }
+
+    public PhysicalStoreModel readByUrl(AddressModel address) throws Exception {
+        return (PhysicalStoreModel) physicalStoreRepository.findByAddress(address);
+    }
+
     public List<PhysicalStoreModel> readAll(){
         return (List<PhysicalStoreModel>) super.readAll(this.physicalStoreRepository);
     }
@@ -43,7 +57,7 @@ public class PhysicalStoreService extends ServiceTemplate {
             String name = physicalStoreDTO.getName() == null ? updatephysicalStore.getName() : physicalStoreDTO.getName();
             String segment = physicalStoreDTO.getSegment() == null ? updatephysicalStore.getSegment() : physicalStoreDTO.getSegment();
             String phone = physicalStoreDTO.getPhone() == null ? updatephysicalStore.getPhone() : physicalStoreDTO.getPhone();
-            String address = physicalStoreDTO.getAddress() == null ? updatephysicalStore.getAddress() : physicalStoreDTO.getAddress();
+            AddressModel address = physicalStoreDTO.getAddress() == null ? updatephysicalStore.getAddress() : AddressDTO.convertDTO(physicalStoreDTO.getAddress());
             Integer numEmployees = physicalStoreDTO.getNumEmployees() == null ? updatephysicalStore.getNumEmployees() : physicalStoreDTO.getNumEmployees();
 
             updatephysicalStore.setCnpj(cnpj);
