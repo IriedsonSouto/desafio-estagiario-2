@@ -1,6 +1,6 @@
 <div align="center">
- <h1>Desafio Estagio - RPE TECH</h1>
- <h2>Desafio 02<h2>
+    <h1>Desafio Estagio - RPE TECH</h1>
+    <h2>Desafio 02<h2>
 </div>
 
 ## :books: Sobre o Sistema:
@@ -8,6 +8,9 @@ O sistema visa manter um cadastro das lojas de clientes para futuras consultas. 
 
 *No projeto, foi utilizado o padrão MVC junto com a ideologia DDD para organizar os pacotes, deste modo as pastas são separadas conforme entidades e regras de negocio, ficando mais fácil observar toda a rota que envolva uma funcionalidade, ajudando na manutenção da aplicação, também adotei o Clear Code, para minimizar comentários ao utilizar nomenclaturas limpas, diretas e autoexplicativas.*
 
+Os testes foram implementados na branch de testes.
+
+#### :warning: [Clique aqui](https://youtu.be/asmv7ALbBFM) e veja meu vídeo explicando mais um pouco sobre a arquitetura e estratégias do projeto (opcional).
 Ao rodar a aplicação você pode acessar a documentação clicando [aqui](http://localhost:8080/swagger-ui/index.html#/).<br>
 <br>
 
