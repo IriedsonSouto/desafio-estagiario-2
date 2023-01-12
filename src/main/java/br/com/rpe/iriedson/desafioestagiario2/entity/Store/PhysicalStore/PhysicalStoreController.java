@@ -93,7 +93,7 @@ public class PhysicalStoreController {
             PhysicalStoreModel result = this.physicalStoreService.update(physicalStoreDTO, uuid);
             return ResponseEntity.status(200).body(new PhysicalStoreDTO(result));
         }catch (Exception e) {
-			return ResponseEntity.status(404).body(physicalStoreDTO);
+			return ResponseEntity.status(400).body(e.getMessage());
 		}
     }
 

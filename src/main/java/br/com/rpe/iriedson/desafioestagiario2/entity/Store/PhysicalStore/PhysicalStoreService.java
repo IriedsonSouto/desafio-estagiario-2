@@ -28,12 +28,14 @@ public class PhysicalStoreService extends ServiceTemplate {
             validationService.validationPhoneFormat(physicalStoreDTO.getPhone());
             validationService.validationCepFormat(physicalStoreDTO.getAddress().getCep());
 
-            PhysicalStoreModel physicalStore = PhysicalStoreDTO.convertDTO(physicalStoreDTO);
-            boolean create = super.create(physicalStore, this.physicalStoreRepository);
-            if(create){
+            AddressModel address = addressService.readByCepAndNumber(physicalStoreDTO.getAddress().getCep(), physicalStoreDTO.getAddress().getNumber());
+
+            if(address == null){
+                PhysicalStoreModel physicalStore = PhysicalStoreDTO.convertDTO(physicalStoreDTO);
+                boolean create = super.create(physicalStore, this.physicalStoreRepository);
                 return physicalStore;
             }
-            return null;
+            throw new Exception("Já há uma loja com esse endereço.");
         }catch (Exception error) {
             throw new Exception("Houve um problema para criar uma Loja Física. Error: "+error.getMessage());
         }
@@ -64,6 +66,16 @@ public class PhysicalStoreService extends ServiceTemplate {
     public PhysicalStoreModel update(PhysicalStoreDTO physicalStoreDTO, String uuid) throws Exception {
         try{
             PhysicalStoreModel updatephysicalStore = physicalStoreRepository.findByUuid(uuid);
+
+            if(physicalStoreDTO.getAddress() != null){
+                if(!(physicalStoreDTO.getAddress().getCep().equals(updatephysicalStore.getAddress().getCep()) 
+                && physicalStoreDTO.getAddress().getNumber().equals(updatephysicalStore.getAddress().getNumber()))){
+                    AddressModel address = addressService.readByCepAndNumber(physicalStoreDTO.getAddress().getCep(), physicalStoreDTO.getAddress().getNumber());
+                    if(address != null){
+                        throw new Exception("Já há uma loja com esse endereço.");
+                    }
+                }
+            }
 
             String cnpj = physicalStoreDTO.getCnpj() == null ? updatephysicalStore.getCnpj() : physicalStoreDTO.getCnpj();
             String name = physicalStoreDTO.getName() == null ? updatephysicalStore.getName() : physicalStoreDTO.getName();
