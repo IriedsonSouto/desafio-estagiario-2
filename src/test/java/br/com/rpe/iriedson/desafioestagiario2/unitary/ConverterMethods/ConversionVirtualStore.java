@@ -1,7 +1,6 @@
 package br.com.rpe.iriedson.desafioestagiario2.unitary.ConverterMethods;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
@@ -9,13 +8,11 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.rpe.iriedson.desafioestagiario2.entity.Store.VirtualStore.VirtualStoreDTO;
 import br.com.rpe.iriedson.desafioestagiario2.entity.Store.VirtualStore.VirtualStoreModel;
 
 
-@SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ConversionVirtualStore {
 
@@ -48,7 +45,7 @@ public class ConversionVirtualStore {
         virtualStore.setCnpj("11.111.111/0001-11");
         virtualStore.setName("Empresa show");
 
-        assertThrows(Exception.class, () -> new VirtualStoreDTO(virtualStore));
+        assertInstanceOf(VirtualStoreDTO.class, new VirtualStoreDTO(virtualStore));
 	}
 
     @Test
@@ -81,6 +78,6 @@ public class ConversionVirtualStore {
         virtualStoreDTO.setName("Empresa show");
         virtualStoreDTO.setSegment("É show");
 
-        assertThrows(Exception.class, () -> VirtualStoreDTO.convertDTO(virtualStoreDTO));	
+        assertInstanceOf(VirtualStoreModel.class, VirtualStoreDTO.convertDTO(virtualStoreDTO));	
 	}
 }

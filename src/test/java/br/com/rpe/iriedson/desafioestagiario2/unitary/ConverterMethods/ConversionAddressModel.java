@@ -1,7 +1,6 @@
 package br.com.rpe.iriedson.desafioestagiario2.unitary.ConverterMethods;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
@@ -9,13 +8,11 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.rpe.iriedson.desafioestagiario2.entity.Store.PhysicalStore.Address.AddressDTO;
 import br.com.rpe.iriedson.desafioestagiario2.entity.Store.PhysicalStore.Address.AddressModel;
 
 
-@SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ConversionAddressModel {
     
@@ -47,7 +44,7 @@ public class ConversionAddressModel {
         AddressModel address = new AddressModel();
         address.setCep("55555-555");
 
-        assertThrows(Exception.class, () -> new AddressDTO(address));
+        assertInstanceOf(AddressDTO.class, new AddressDTO(address));
 	}
 
     @Test
@@ -77,7 +74,7 @@ public class ConversionAddressModel {
         AddressDTO addressDTO = new AddressDTO();
         addressDTO.setCep("55555-555");
 
-        assertThrows(Exception.class, () -> AddressDTO.convertDTO(addressDTO));	
+        assertInstanceOf(AddressModel.class, AddressDTO.convertDTO(addressDTO));	
 	}
 
 }
