@@ -23,7 +23,7 @@ public class PhysicalStoreController {
     @Autowired
     private PhysicalStoreService physicalStoreService;
 
-    @Operation(summary = "Create new Physical Store", description = "CNPJ format: XX.XXX.XXX/XXXX-XX, Phone format: (XX)X.XXXX-XXXX, CEP format: XXXXX-XXX" )
+    @Operation(summary = "Create new Physical Store", description = "CNPJ format: XX.XXX.XXX/XXXX-XX, Phone format: (XX)X.XXXX-XXXX, CEP format: XXXXX-XXX, UF format: XX")
     @PostMapping
     public ResponseEntity create(@RequestBody PhysicalStoreDTO physicalStoreDTO) {
         try{
@@ -86,7 +86,7 @@ public class PhysicalStoreController {
         }
     }
 
-    @Operation(summary = "Update a Physical Store", description = "CNPJ format: XX.XXX.XXX/XXXX-XX, Phone format: (XX)X.XXXX-XXXX, CEP format: XXXXX-XXX" )
+    @Operation(summary = "Update a Physical Store", description = "CNPJ format: XX.XXX.XXX/XXXX-XX, Phone format: (XX)X.XXXX-XXXX, CEP format: XXXXX-XXX, UF format: XX")
     @PutMapping("/{uuid}")
     public ResponseEntity update(@RequestBody PhysicalStoreDTO physicalStoreDTO, @PathVariable("uuid") String uuid) {
         try{

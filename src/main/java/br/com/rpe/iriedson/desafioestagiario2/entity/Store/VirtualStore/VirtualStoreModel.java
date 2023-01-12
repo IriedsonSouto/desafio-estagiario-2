@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity(name = "virtual_store")
+@PrimaryKeyJoinColumn(name="uuid")
 public class VirtualStoreModel extends StoreModel implements Serializable {
     
     @Column(unique=true, nullable=false)
