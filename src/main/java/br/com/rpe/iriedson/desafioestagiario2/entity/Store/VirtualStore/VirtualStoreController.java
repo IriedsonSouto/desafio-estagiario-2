@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 import java.util.List;
 
 @RestController
@@ -21,6 +23,7 @@ public class VirtualStoreController {
     @Autowired
     private VirtualStoreService virtualStoreService;
 
+    @Operation(summary = "Create new Virtual Store", description = "CNPJ format: XX.XXX.XXX/XXXX-XX, Phone format: (XX)X.XXXX-XXXX" )
     @PostMapping
     public ResponseEntity create(@RequestBody VirtualStoreDTO virtualStoreDTO) {
         try{
@@ -31,12 +34,14 @@ public class VirtualStoreController {
 		}
     }
 
+    @Operation(summary = "Search all Virtual Store")
     @GetMapping
     public ResponseEntity<List<VirtualStoreDTO>> findAll(){
         List<VirtualStoreModel> result = this.virtualStoreService.readAll();
         return ResponseEntity.status(200).body(VirtualStoreDTO.convert(result));
     }
 
+    @Operation(summary = "Search a Virtual Store by unique identifier")
     @GetMapping("/get-by-uuid/{uuid}")
     public ResponseEntity<VirtualStoreDTO> find(@PathVariable("uuid") String uuid) {
         try{
@@ -47,6 +52,7 @@ public class VirtualStoreController {
         }
     }
 
+    @Operation(summary = "Search a Virtual Store by cnpj", description = "CNPJ format: XX.XXX.XXX/XXXX-XX")
     @GetMapping("/get-by-cnpj/{cnpj}")
     public ResponseEntity<VirtualStoreDTO> findByCnpj(@RequestParam("cnpj") String cnpj) {
         try{
@@ -57,6 +63,7 @@ public class VirtualStoreController {
         }
     }
 
+    @Operation(summary = "Search a Virtual Store by phone", description = "Phone format: (XX)X.XXXX-XXXX")
     @GetMapping("/get-by-phone/{phone}")
     public ResponseEntity<VirtualStoreDTO> findByPhone(@RequestParam("phone") String phone) {
         try{
@@ -67,6 +74,7 @@ public class VirtualStoreController {
         }
     }
 
+    @Operation(summary = "Search a Virtual Store by url")
     @GetMapping("/get-by-url/{url}")
     public ResponseEntity<VirtualStoreDTO> findByUrl(@RequestParam("url") String url) {
         try{
@@ -77,6 +85,7 @@ public class VirtualStoreController {
         }
     }
 
+    @Operation(summary = "Update a Virtual Store", description = "CNPJ format: XX.XXX.XXX/XXXX-XX, Phone format: (XX)X.XXXX-XXXX" )
     @PutMapping("/{uuid}")
     public ResponseEntity update(@RequestBody VirtualStoreDTO virtualStoreDTO, @PathVariable("uuid") String uuid) {
         try{
@@ -87,6 +96,7 @@ public class VirtualStoreController {
 		}
     }
 
+    @Operation(summary = "Delete a Virtual Store")
     @DeleteMapping("/{uuid}")
     public ResponseEntity<String> delete(@PathVariable("uuid") String uuid){
         boolean result = this.virtualStoreService.delete(uuid);

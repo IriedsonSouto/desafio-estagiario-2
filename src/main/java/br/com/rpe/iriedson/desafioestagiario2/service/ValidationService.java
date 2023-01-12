@@ -11,7 +11,7 @@ public class ValidationService {
         if(cnpj.matches(regex)) {
         	return cnpj;
 		}     
-        throw new Exception("Formato do CNPJ invalido");		
+        throw new Exception("Formato do CNPJ invalido, formato esperado: XX.XXX.XXX/XXXX-XX");		
 	}
 
     public String validationPhoneFormat(String phone) throws Exception {
@@ -20,7 +20,7 @@ public class ValidationService {
         if(phone.matches(regex)) {
         	return phone;
 		}     
-        throw new Exception("Formato do telefone invalido");		
+        throw new Exception("Formato do telefone invalido, formato esperado: (XX)X.XXXX-XXXX");		
 	}
 
     public String validationCepFormat(String cep) throws Exception {
@@ -29,7 +29,7 @@ public class ValidationService {
         if(cep.matches(regex)) {
         	return cep;
 		}     
-        throw new Exception("Formato do cep invalido");		
+        throw new Exception("Formato do cep invalido, formato esperado: XXXXX-XXX");		
 	}
 
 }
