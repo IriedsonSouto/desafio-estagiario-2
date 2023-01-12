@@ -13,7 +13,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity(name = "physical_store")
-@PrimaryKeyJoinColumn(name="uuid")
 public class PhysicalStoreModel extends StoreModel implements Serializable {
     
     @Column(nullable=false)

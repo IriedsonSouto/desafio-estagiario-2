@@ -13,7 +13,7 @@ import jakarta.persistence.*;
 @Getter
 @Setter
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class StoreModel {
     
     @Id
