@@ -44,6 +44,7 @@ public class PhysicalStoreService extends ServiceTemplate {
     }
 
     public PhysicalStoreModel readByCnpj(String cnpj) throws Exception {
+        cnpj = cnpj.replaceAll("%2F", "/");
         return (PhysicalStoreModel) physicalStoreRepository.findByCnpj(cnpj);
     }
 

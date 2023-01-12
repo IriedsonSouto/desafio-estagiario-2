@@ -38,6 +38,7 @@ public class VirtualStoreService extends ServiceTemplate {
     }
 
     public VirtualStoreModel readByCnpj(String cnpj) throws Exception {
+        cnpj = cnpj.replaceAll("%2F", "/");
         return (VirtualStoreModel) virtualStoreRepository.findByCnpj(cnpj);
     }
 

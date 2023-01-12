@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class PhysicalStoreController {
     }
 
     @GetMapping("/get-by-cnpj/{cnpj}")
-    public ResponseEntity<PhysicalStoreDTO> findByCnpj(@PathVariable("cnpj") String cnpj) {
+    public ResponseEntity<PhysicalStoreDTO> findByCnpj(@RequestParam("cnpj") String cnpj) {
         try{
             PhysicalStoreModel result = this.physicalStoreService.readByCnpj(cnpj);
             return ResponseEntity.status(200).body(new PhysicalStoreDTO(result));
@@ -57,7 +58,7 @@ public class PhysicalStoreController {
     }
 
     @GetMapping("/get-by-phone/{phone}")
-    public ResponseEntity<PhysicalStoreDTO> findByPhone(@PathVariable("phone") String phone) {
+    public ResponseEntity<PhysicalStoreDTO> findByPhone(@RequestParam("phone") String phone) {
         try{
             PhysicalStoreModel result = this.physicalStoreService.readByPhone(phone);
             return ResponseEntity.status(200).body(new PhysicalStoreDTO(result));
@@ -67,8 +68,8 @@ public class PhysicalStoreController {
     }
 
     @GetMapping("/get-by-address/{cep}-{numer}")
-    public ResponseEntity<PhysicalStoreDTO> findByCepAndNumer(@PathVariable("cep") String cep,
-                                                            @PathVariable("numer") Integer numer) {
+    public ResponseEntity<PhysicalStoreDTO> findByCepAndNumer(@RequestParam("cep") String cep,
+                                                            @RequestParam("numer") Integer numer) {
         try{
             PhysicalStoreModel result = this.physicalStoreService.readByCepAndNumer(cep, numer);
             return ResponseEntity.status(200).body(new PhysicalStoreDTO(result));

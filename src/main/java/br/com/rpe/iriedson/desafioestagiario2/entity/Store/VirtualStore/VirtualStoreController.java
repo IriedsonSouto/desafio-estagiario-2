@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class VirtualStoreController {
     }
 
     @GetMapping("/get-by-cnpj/{cnpj}")
-    public ResponseEntity<VirtualStoreDTO> findByCnpj(@PathVariable("cnpj") String cnpj) {
+    public ResponseEntity<VirtualStoreDTO> findByCnpj(@RequestParam("cnpj") String cnpj) {
         try{
             VirtualStoreModel result = this.virtualStoreService.readByCnpj(cnpj);
             return ResponseEntity.status(200).body(new VirtualStoreDTO(result));
@@ -57,7 +58,7 @@ public class VirtualStoreController {
     }
 
     @GetMapping("/get-by-phone/{phone}")
-    public ResponseEntity<VirtualStoreDTO> findByPhone(@PathVariable("phone") String phone) {
+    public ResponseEntity<VirtualStoreDTO> findByPhone(@RequestParam("phone") String phone) {
         try{
             VirtualStoreModel result = this.virtualStoreService.readByPhone(phone);
             return ResponseEntity.status(200).body(new VirtualStoreDTO(result));
@@ -67,7 +68,7 @@ public class VirtualStoreController {
     }
 
     @GetMapping("/get-by-url/{url}")
-    public ResponseEntity<VirtualStoreDTO> findByUrl(@PathVariable("url") String url) {
+    public ResponseEntity<VirtualStoreDTO> findByUrl(@RequestParam("url") String url) {
         try{
             VirtualStoreModel result = this.virtualStoreService.readByUrl(url);
             return ResponseEntity.status(200).body(new VirtualStoreDTO(result));
